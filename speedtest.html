@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeedTest Dinámico - Test de Velocidad</title>
+    <link rel="stylesheet" href="speedtest.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <h1>SpeedTest Pro</h1>
+            </div>
+            <div class="connection-info">
+                <span class="connection-status" id="connection-status">
+                    <i class="fas fa-wifi"></i>
+                    <span id="connection-type">Detectando...</span>
+                </span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="speedometer-container">
+                <div class="speedometer" id="speedometer">
+                    <div class="speedometer-inner">
+                        <div class="needle" id="needle"></div>
+                        <div class="center-dot"></div>
+                        <div class="speed-display">
+                            <span class="speed-value" id="speed-value">0</span>
+                            <span class="speed-unit">Mbps</span>
+                        </div>
+                    </div>
+                    <div class="speed-labels">
+                        <span class="label-0">0</span>
+                        <span class="label-25">25</span>
+                        <span class="label-50">50</span>
+                        <span class="label-100">100</span>
+                        <span class="label-200">200+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-info">
+                <div class="test-phase" id="test-phase">Listo para comenzar</div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="start-button" id="start-button" onclick="startSpeedTest()">
+                    <i class="fas fa-play"></i>
+                    Iniciar Test
+                </button>
+                <button class="stop-button" id="stop-button" onclick="stopSpeedTest()" style="display: none;">
+                    <i class="fas fa-stop"></i>
+                    Detener Test
+                </button>
+            </div>
+
+            <div class="results-container" id="results-container" style="display: none;">
+                <div class="results-grid">
+                    <div class="result-card download">
+                        <div class="result-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="result-info">
+                            <div class="result-label">Descarga</div>
+                            <div class="result-value" id="download-result">0 Mbps</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card upload">
+                        <div class="result-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="result-info">
+                            <div class="result-label">Subida</div>
+                            <div class="result-value" id="upload-result">0 Mbps</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card ping">
+                        <div class="result-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="result-info">
+                            <div class="result-label">Ping</div>
+                            <div class="result-value" id="ping-result">0 ms</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card jitter">
+                        <div class="result-icon">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <div class="result-info">
+                            <div class="result-label">Jitter</div>
+                            <div class="result-value" id="jitter-result">0 ms</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-container" id="tips-container" style="display: none;">
+                <h3><i class="fas fa-lightbulb"></i> Consejos para Mejorar tu Red</h3>
+                <div class="tips-grid" id="tips-grid">
+                    <!-- Los consejos se generarán dinámicamente -->
+                </div>
+            </div>
+
+            <div class="network-info" id="network-info">
+                <h3><i class="fas fa-info-circle"></i> Información de Red</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">IP Pública:</span>
+                        <span class="info-value" id="public-ip">Detectando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Proveedor:</span>
+                        <span class="info-value" id="isp">Detectando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ubicación:</span>
+                        <span class="info-value" id="location">Detectando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Navegador:</span>
+                        <span class="info-value" id="browser-info">Detectando...</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="server-info">
+                <i class="fas fa-server"></i>
+                <span>Servidor Propio - Test Personalizado</span>
+            </div>
+            <div class="last-test" id="last-test" style="display: none;">
+                <i class="fas fa-history"></i>
+                <span>Último test: <span id="last-test-time"></span></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de información -->
+    <div class="modal" id="info-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Información del Test</h3>
+            <div class="modal-body">
+                <p><strong>Duración:</strong> 20 segundos total (10s descarga + 10s subida)</p>
+                <p><strong>Servidor:</strong> Propio con optimizaciones</p>
+                <p><strong>Precisión:</strong> Alta precisión con múltiples mediciones</p>
+                <p><strong>Consejos:</strong> Recomendaciones personalizadas según resultados</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="speedtest.js"></script>
+</body>
+</html>
