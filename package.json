@@ -1,0 +1,34 @@
+{
+  "name": "dynamic-portfolio-web",
+  "version": "1.0.0",
+  "description": "Una aplicación web dinámica e interactiva con portfolio moderno",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "build": "echo 'Build completed - static files ready'",
+    "deploy": "npm run build",
+    "dev": "npx live-server --port=3000"
+  },
+  "keywords": [
+    "portfolio",
+    "dynamic",
+    "interactive",
+    "web",
+    "javascript",
+    "css3",
+    "html5"
+  ],
+  "author": "Desarrollador Web",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
