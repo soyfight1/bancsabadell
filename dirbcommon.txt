@@ -1,0 +1,30 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirbcommon.txt
+START_TIME: Mon Aug  4 16:13:20 2025
+URL_BASE: http://10.10.11.68/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+ADDED_HEADERS: 
+--
+Host: planning.htb
+--
+OPTION: Not Recursive
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.11.68/ ----
+==> DIRECTORY: http://10.10.11.68/css/
+==> DIRECTORY: http://10.10.11.68/img/
++ http://10.10.11.68/index.php (CODE:200|SIZE:23914)
+==> DIRECTORY: http://10.10.11.68/js/
+==> DIRECTORY: http://10.10.11.68/lib/
+
+-----------------
+END_TIME: Mon Aug  4 16:20:59 2025
+DOWNLOADED: 4612 - FOUND: 1
